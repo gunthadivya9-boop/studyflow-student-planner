@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="StudyFlow student planner — organize tasks, classes, exams, and study goals.">
+  <title>StudyFlow | Student Planner</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="#"><span class="brand-mark">S</span><span>StudyFlow</span></a>
+      <p class="nav-label">WORKSPACE</p>
+      <nav class="nav">
+        <button class="nav-item active" data-view="dashboard">▦ &nbsp; Dashboard</button>
+        <button class="nav-item" data-view="tasks">✓ &nbsp; My Tasks</button>
+        <button class="nav-item" data-view="timetable">▤ &nbsp; Timetable</button>
+        <button class="nav-item" data-view="exams">✦ &nbsp; Exams</button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="upgrade-card"><div class="sparkle">✦</div><strong>Study smarter</strong><p>Build a routine that works for you.</p><button id="upgradeBtn" class="upgrade-button">Explore Premium ↗</button></div>
+        <div class="profile"><div class="avatar">SD</div><div><strong>Student</strong><small>Free plan</small></div></div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <button class="mobile-menu" id="menuBtn" aria-label="Toggle navigation">☰</button>
+        <div class="breadcrumb">Workspace <span>/</span> <strong id="pageName">Dashboard</strong></div>
+        <div class="top-actions"><span class="today-pill" id="todayLabel"></span><button class="icon-button" title="Notifications" aria-label="Notifications">♧</button><div class="avatar">SD</div></div>
+      </header>
+
+      <section class="page-heading">
+        <div><p class="eyebrow" id="greeting">YOUR STUDY SPACE</p><h1 id="heading">Good morning, Student <span>✦</span></h1><p class="subheading">A little progress each day adds up to big results.</p></div>
+        <button class="primary-button" id="quickAdd">＋ Add a task</button>
+      </section>
+
+      <section class="stats-grid">
+        <article class="stat-card"><div class="stat-top"><span>Tasks completed</span><span class="stat-icon blue">✓</span></div><div class="stat-number" id="completedCount">0 <small>/ 0</small></div><div class="progress-track"><div class="progress-fill" id="taskProgress"></div></div><p class="stat-foot">Keep up the momentum</p></article>
+        <article class="stat-card"><div class="stat-top"><span>Due today</span><span class="stat-icon violet">◷</span></div><div class="stat-number" id="dueCount">0</div><p class="stat-foot">Tasks to focus on today</p></article>
+        <article class="stat-card"><div class="stat-top"><span>Study streak</span><span class="stat-icon orange">⚡</span></div><div class="stat-number">3 <small>days</small></div><p class="stat-foot">You're building a habit!</p></article>
+        <article class="stat-card"><div class="stat-top"><span>Upcoming exams</span><span class="stat-icon green">✦</span></div><div class="stat-number" id="examCount">2</div><p class="stat-foot">Plan ahead, stress less</p></article>
+      </section>
+
+      <section class="content-grid">
+        <article class="panel task-panel">
+          <div class="panel-header"><div><h2 id="listTitle">Today's tasks</h2><p>Your next steps, all in one place.</p></div><button class="text-button" id="viewAll">View all →</button></div>
+          <div class="task-filters"><button class="filter active" data-filter="all">All tasks</button><button class="filter" data-filter="active">In progress</button><button class="filter" data-filter="completed">Completed</button></div>
+          <div id="taskList" class="task-list"></div>
+          <div id="emptyState" class="empty-state" hidden><div>✧</div><strong>Nothing on your list yet</strong><p>Add a task and make today count.</p><button class="primary-button" id="emptyAdd">＋ Create a task</button></div>
+        </article>
+
+        <div class="right-column">
+          <article class="panel schedule-panel"><div class="panel-header"><div><h2>Today's schedule</h2><p>Your day at a glance</p></div><span class="mini-calendar">▦</span></div><div class="schedule-list" id="scheduleList"></div><button class="outline-button" data-open="timetable">View timetable →</button></article>
+          <article class="focus-card"><div class="focus-orb">✦</div><p class="eyebrow">A NOTE FOR YOU</p><h2>Focus on progress, not perfection.</h2><p>Every study session is a step closer to your goals.</p><div class="focus-decoration">✧</div></article>
+        </div>
+      </section>
+      <footer>Made for your next big idea <span>♥</span> <b>StudyFlow</b></footer>
+    </main>
+  </div>
+
+  <dialog id="taskDialog" class="task-dialog">
+    <form id="taskForm">
+      <div class="dialog-heading"><div><p class="eyebrow">STAY ORGANIZED</p><h2>Add a task</h2></div><button type="button" class="close-button" id="closeDialog" aria-label="Close">×</button></div>
+      <label for="taskTitle">Task name</label><input id="taskTitle" name="title" placeholder="e.g. Review biology notes" required maxlength="100">
+      <div class="form-row"><div><label for="taskSubject">Subject</label><input id="taskSubject" name="subject" placeholder="e.g. Biology" maxlength="40"></div><div><label for="taskTime">Time</label><input id="taskTime" name="time" type="time" value="16:00" required></div></div>
+      <label for="taskDate">Due date</label><input id="taskDate" name="date" type="date" required>
+      <label for="taskPriority">Priority</label><select id="taskPriority" name="priority"><option>Medium</option><option>High</option><option>Low</option></select>
+      <button class="primary-button submit-button" type="submit">Save task</button>
+    </form>
+  </dialog>
+  <div id="toast" class="toast" role="status"></div>
+  <script src="script.js"></script>
+</body>
+</html>
